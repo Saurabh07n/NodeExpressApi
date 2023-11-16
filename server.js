@@ -2,6 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // create express app
 const app = express();
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header("Access-Control-Allow-Headers","*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE"); 
+  next();
+});
 // Setup server port
 const port = process.env.PORT || 4000;
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -28,7 +34,7 @@ app.get('/', (req, res) => {
 // Require Users routes
 const userRoutes = require('./src/routes/user.routes')
 // using as middleware
-app.use('/api/users', userRoutes)
+app.use('/list', userRoutes)
 // listen for requests
 app.listen(port, () => {
    console.log(`Node server is listening on port ${port}`);

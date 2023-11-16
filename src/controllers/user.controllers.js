@@ -20,10 +20,11 @@ if(!req.body) {
 }
 // Create a new User
 const user = new User({
-  first_name: req.body.first_name,
-  last_name: req.body.last_name,
-  email: req.body.last_name,
-  phone: req.body.last_name
+  _id: req.body.id,
+  id: req.body.id,
+  name: req.body.name,
+  owner: req.body.owner,
+  priority: req.body.priority
 });
 // Save user in the database
 user.save()
@@ -66,10 +67,10 @@ if(!req.body) {
 }
 // Find user and update it with the request body
 User.findByIdAndUpdate(req.params.id, {
-  first_name: req.body.first_name,
-  last_name: req.body.last_name,
-  email: req.body.last_name,
-  phone: req.body.last_name
+  id: req.body.id,
+  name: req.body.name,
+  owner: req.body.owner,
+  priority: req.body.priority
 }, {new: true})
 .then(user => {
  if(!user) {
@@ -91,7 +92,7 @@ return res.status(500).send({
 };
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
-User.findByIdAndRemove(req.params.id)
+User.findByIdAndDelete(req.params.id)
 .then(user => {
 if(!user) {
   return res.status(404).send({
