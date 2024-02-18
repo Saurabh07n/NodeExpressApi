@@ -23,8 +23,10 @@ const user = new User({
   _id: req.body.id,
   id: req.body.id,
   name: req.body.name,
-  owner: req.body.owner,
-  priority: req.body.priority
+  ownerList: req.body.ownerList,
+  priority: req.body.priority,
+  description: req.body.description,
+  endDate: req.body.endDate
 });
 // Save user in the database
 user.save()
@@ -69,8 +71,10 @@ if(!req.body) {
 User.findByIdAndUpdate(req.params.id, {
   id: req.body.id,
   name: req.body.name,
-  owner: req.body.owner,
-  priority: req.body.priority
+  ownerList: req.body.ownerList,
+  priority: req.body.priority,
+  description: req.body.description,
+  endDate: req.body.endDate
 }, {new: true})
 .then(user => {
  if(!user) {
